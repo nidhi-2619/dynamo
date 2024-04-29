@@ -1,6 +1,6 @@
-import mongoose, {Schema} from 'mongoose';
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+import mongoose, {Schema} from "mongoose";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
 
 // direct encryption is not possible so we will use mongoose hook
@@ -39,7 +39,7 @@ const userSchema = new Schema({
     watchHistory:[// array because more than one video can be watched
         { // dependent on videos
             type:Schema.Types.ObjectId,
-            ref:'Video'
+            ref:"Video"
         }
     ],
     password:{
@@ -58,7 +58,7 @@ const userSchema = new Schema({
 // middleware [next is a flag which will tell that the function has been executed]
 userSchema.pre({
     save: async function(next){
-        if(this.isModified('password')){
+        if(this.isModified("password")){
             this.password = await bcrypt.hash(this.password, 10);
         }
         next();
@@ -86,7 +86,7 @@ userSchema.methods.generateRefreshToken = async function(){
 }
 
 
-export const User = mongoose.model('User', userSchema);
+export const User = mongoose.model("User", userSchema);
 // it will store as user in the database
 
 // jwt is a bearer token : means someone who bear 
