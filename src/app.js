@@ -33,3 +33,19 @@ app.use(express.static("public"))
 // to perform crud on cookies 
 // the cookies are stored on the system server
 app.use(cookieParser())
+
+
+//routes import
+
+import userRouter from "./routes/user.route.js";
+
+//routes declaration
+// we were using router and controller at one place when we were using get and post
+// now we are separating router and controller so we have to use the middleware to use the router
+// controll is tranfered to the userRouter
+// this is act as prefix in route
+app.use("/api/v1/user", userRouter);
+
+
+
+export {app};
